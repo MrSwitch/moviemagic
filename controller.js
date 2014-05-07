@@ -1,3 +1,6 @@
+var API_ENDPOINT = 'http://ec2-54-79-170-49.ap-southeast-2.compute.amazonaws.com/';
+
+
 function app($scope, $http){
 
 
@@ -15,12 +18,19 @@ function app($scope, $http){
 
 			while( (m = reg.exec(text)) ){
 				$scope.images.push({
-					image : m[3]
+					image : m[3],
+					text : ""
 				});
 			}
 		});
 
+		/* CORS ERROR	
+		$http.get( API_ENDPOINT + 'findimages?url=' + $scope.url).success( function(text){
+			$scope.images = JSON.parse(text);
+		});
+		*/
 	};
+
 
 	// Contains a list of images which can be dropped into a theme
 	$scope.images = [];
@@ -40,10 +50,11 @@ function app($scope, $http){
 	// Send the item to the server and creates
 	$scope.submit = function(){
 
-		var body = angular.toJSON($scope.timeline);
+		var body = angular.toJson($scope.timeline);
 
-		$http.post( 'http://tobedetermined/', body, function(){
-			//
+		$http.post( API_ENDPOINT, body, function(e){
+			// 
+			console.log(e);
 		});
 	};
 

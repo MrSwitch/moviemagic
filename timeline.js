@@ -13,8 +13,6 @@ angular.module('timeslides', [])
 		templateUrl: 'timeline.html',
 		link : function(scope, elms, attrs){
 
-			console.log(scope, elms, attrs);
-
 			//
 			// Drag and drop
 			//
@@ -22,8 +20,9 @@ angular.module('timeslides', [])
 				alert(arguments);
 			});
 
-			scope.onDrop = function(e){
-				console.log(e);
+			scope.onDrop = function(item){
+				scope.frames.push(item);
+				scope.$apply();
 			};
 
 			//
@@ -45,13 +44,47 @@ angular.module('timeslides', [])
 		}
 	};
 })
-.directive('onDrop', function(){
+.directive('timelineOnDrop', function(){
 	return {
 		restrict : 'A',
-		link : function(scope, elms, attrs){
-			scope.onDrop = function(){
-				alert(arguments);
-			};
+		scope : {
+			timelineOnDrop : '='
+		},
+		link : function(scope, el, attrs){
+			//elms.bind('drop', scope.onDrop );
+			var id = angular.element(el).attr("id");
+			if (!id) {
+				id = (Math.random()*1e20).toString(36);
+				angular.element(el).attr("id", id);
+			}
+
+			el.bind('drop', function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				var data = e.dataTransfer.getData("text");
+				var dragEl = document.getElementById(data);
+				var dropEl = document.getElementById(id);
+				scope.timelineOnDrop( angular.element(dragEl).scope().item );
+			});
+
+			// by default elements can not be dropped into others
+			el.bind('dragover', function(e){
+				e.preventDefault();
+			});
+		}
+	};
+}).directive('draggable', function(){
+	return {
+		restrict : 'A',
+		link : function(scope, el, attrs){
+			var id = angular.element(el).attr("id");
+			if (!id) {
+				id = (Math.random()*1e20).toString(36);
+				angular.element(el).attr("id", id);
+			}
+			el.bind("dragstart", function(e) {
+				e.dataTransfer.setData('text', id);
+            });
 		}
 	};
 });

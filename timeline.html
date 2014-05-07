@@ -1,0 +1,12 @@
+<div class="timeline">
+	<div class="dropzone" ondrop="console.log('drop')" on-drop="onDrop">
+		<figure ng-repeat="item in frames track by $index" droppable draggable ng-click="$parent.selected(item)">
+			<img ng-src="{{item.image}}" />
+			<figcaption>{{item.title}}</figcaption>
+		</figure>
+	</div>
+	<div class="controls">
+		<a href="#" class="prev" ng-click="prev()">&lt;</a>
+		<a href="#" class="next" ng-click="next()">&gt;</a>
+	</div>
+</div>

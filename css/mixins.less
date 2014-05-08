@@ -1,0 +1,61 @@
+// MEDIA QUERIES
+@mobile: ~"all and (max-width: 640px)";
+
+// Animations
+.animate(@val){
+	-webkit-animation: @val;
+	-moz-animation: @val;
+	-o-animation: @val;
+	animation: @val;
+}
+// Animation Delay
+.animate-delay(@val){
+	-webkit-animation-delay: @val;
+	-moz-animation-delay: @val;
+	-o-animation-delay: @val;
+	animation-delay: @val;
+}
+
+
+// Transform MIXIN
+.transform (@val;@origin:0 0) {
+	-webkit-transform: @val;
+	-webkit-transform-origin: @origin;
+	-moz-transform: @val;
+	-moz-transform-origin: @origin;
+	-ms-transform: @val;
+	-ms-transform-origin: @origin;
+	-o-transform: @val;
+	-o-transform-origin: @origin;
+	transform: @val;
+	transform-origin: @origin;
+}
+
+// OPACITY
+.opacity(@val){
+	opacity:@val;
+	@cent:@val*100;
+	filter:~"alpha(opacity=@{cent})";
+}
+
+.transition(@val){
+	-webkit-transition: @val;
+	-moz-transition: @val;
+	-o-transition: @val;
+	transition: @val;
+}
+
+.transition-delay(@val){
+	-webkit-transition-delay: @val;
+	-moz-transition-delay: @val;
+	-o-transition-delay: @val;
+	transition-delay: @val;
+}
+
+.clearfix{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}	

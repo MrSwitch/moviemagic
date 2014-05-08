@@ -13,13 +13,6 @@ angular.module('timeslides', [])
 		templateUrl: 'timeline.html',
 		link : function(scope, elms, attrs){
 
-			//
-			// Drag and drop
-			//
-			elms.find('.dropzone').on('drop', function(){
-				alert(arguments);
-			});
-
 			scope.onDrop = function(item){
 				scope.frames.push(item);
 				scope.$apply();
@@ -28,18 +21,38 @@ angular.module('timeslides', [])
 			//
 			// Navigation
 			// 
-			scope.currentIndex = 1;
+			var currentIndex = 0,
+				containerWidth,
+				dropzone = elms[0].querySelector('.dropzone');
 
 			scope.next = function(){
 				// scroll left
-				scope.currentIndex += 1;
+				currentIndex += 1;
+				scroll();
 			};
 
 			scope.prev = function(){
 				// scroll right
-				scope.currentIndex -= 1;
+				if(currentIndex>0){
+					currentIndex -= 1;
+				}
+				scroll();
 			};
 
+			var scroll = function(){
+				dropzone.style.marginLeft = - ( containerWidth * currentIndex) + "px";
+			};
+
+			// resize
+			var resize = function(){
+				// Set container width
+				containerWidth = dropzone.offsetWidth;
+				scroll();
+			};
+
+			window.addEventListener('resize', resize);
+
+			resize();
 
 		}
 	};
@@ -61,6 +74,7 @@ angular.module('timeslides', [])
 			el.bind('drop', function(e){
 				e.preventDefault();
 				e.stopPropagation();
+				el.removeClass('dragenter');
 				var data = e.dataTransfer.getData("text");
 				var dragEl = document.getElementById(data);
 				var dropEl = document.getElementById(id);
@@ -69,6 +83,15 @@ angular.module('timeslides', [])
 
 			// by default elements can not be dropped into others
 			el.bind('dragover', function(e){
+				el.addClass('dragover');
+				e.preventDefault();
+			});
+			el.bind('dragenter', function(e){
+				el.addClass('dragenter');
+				e.preventDefault();
+			});
+			el.bind('dragleave', function(e){
+				el.removeClass('dragenter');
 				e.preventDefault();
 			});
 		}

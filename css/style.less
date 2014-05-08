@@ -1,0 +1,75 @@
+@import "mixins";
+
+h3{
+	
+}
+
+
+.timeline{
+
+	width:100%;
+
+	>.dropzone{
+
+		display:flex;
+		align-items:flex-start;
+		background-color:#eee;
+		flex-direction:row;
+		min-height:50px;
+		overflow: auto;
+		.transition( margin-left 0.3s );
+
+		&:empty:before{
+			content:"Drag images here";
+		}
+	}
+
+	figure{
+		margin:10px;
+		cursor:pointer;
+		display:inline-block;
+		position:relative;
+		width:100px;
+		min-width:100px;
+		min-height:100px;
+
+		> img{
+			width:100%;
+		}
+
+		> figcaption{
+			width:100%;
+
+			> input{
+				width:100%;
+			}
+		}
+
+		&.placeholder{
+			width:20px;
+			margin:10px 0;
+			min-width:20px;
+		}
+		&.flex{
+			flex:1 1 auto;
+			text-align:center;
+			&:after, &:before{
+				display: inline-block;
+				vertical-align: middle;
+			}
+			&:before{
+				content:"";
+				height:100px;
+			}
+			&:after{
+				content:"Dropzone";
+			}
+		}
+
+		border: 3px dotted transparent;
+
+		&.dragenter{
+			border-color: orangered;
+		}
+	}
+}

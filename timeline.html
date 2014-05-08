@@ -1,9 +1,11 @@
 <div class="timeline">
-	<div class="dropzone" timeline-on-drop="onDrop">
-		<figure ng-repeat="item in frames track by $index" draggable="true" ng-click="$parent.selected(item)">
+	<div class="dropzone">
+		<figure ng-repeat-start="item in frames track by $index" class="placeholder" timeline-on-drop="onDrop"></figure>
+		<figure ng-repeat-end draggable="true" ng-click="$parent.selected(item)" timeline-on-drop="onDrop">
 			<img ng-src="{{item.image}}" />
-			<figcaption>{{item.title}}</figcaption>
+			<figcaption><input type="text" ng-model="item.title" placeholder="text"/></figcaption>
 		</figure>
+		<figure class="placeholder flex" timeline-on-drop="onDrop"></figure>
 	</div>
 	<div class="controls">
 		<a href="#" class="prev" ng-click="prev()">&lt;</a>

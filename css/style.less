@@ -21,7 +21,16 @@ body {
 	padding-top: 40px;
 }
 
+<<<<<<< HEAD
 textarea, input, button { outline: none; }
+=======
+a{
+	text-decoration: none;
+	color:inherit;
+}
+
+textarea, input { outline: none; }
+>>>>>>> b85a89e8ac309c2115d5d1df19ef7230427dd1cf
 
 input[type=url] {
 	color:#3c3c3c;
@@ -178,6 +187,30 @@ section {
 					content:"Remove item from list";
 				}
 			}
+		}
+	}
+}
+
+
+.popup{
+	position:fixed;
+	top:5%;
+	left:5%;
+	right:5%;
+	bottom:5%;
+	background-color: white;
+	color:black;
+	box-shadow:0 0 100px black;
+
+	> .close{
+		position:absolute;
+		top:-1em;
+		right:-1em;
+		background-color:black;
+		color:white;
+
+		&:before{
+			content:'\2715';
 		}
 	}
 }

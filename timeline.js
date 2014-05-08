@@ -1,6 +1,6 @@
 //
 // Timelines is a collection of 
-angular.module('timeslides', [])
+angular.module('timeslides')
 .directive('timeline', function() {
 	return {
 		restrict: 'E',

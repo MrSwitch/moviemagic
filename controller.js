@@ -5,17 +5,18 @@ angular.module('timeslides', ['ngRoute'])
 .config(['$routeProvider',
     function($routeProvider) {
       $routeProvider
-        .when('/:id', {
+        .when('/movie/:id', {
           templateUrl: 'submit.html',
           controller: 'submitController'
         });
   }])
 
-.controller('app', ['$scope','$http', '$location', function ($scope, $http, $location){
+.controller('app', ['$scope', '$http', '$location', function ($scope, $http, $location){
+
+	// Preload the search from the search query
+	$scope.url = $location.search().url;
 
 	// Define a function for finding the images available from the API
-	$scope.url = 'http://www.news.com.au/world/oscar-pistorius-accused-of-making-very-sinister-remark-denies-asking-state-witness-how-can-you-sleep-at-night/story-fndir2ev-1226908098389';
-
 	$scope.findImages = function(){
 
 		$http.get("http://proxy-server.herokuapp.com/" + $scope.url).success( function(text){
@@ -40,6 +41,10 @@ angular.module('timeslides', ['ngRoute'])
 		*/
 	};
 
+	// Load up initial search
+	if( $scope.url ){
+		$scope.findImages();
+	}
 
 	// Contains a list of images which can be dropped into a theme
 	$scope.images = [];
@@ -63,11 +68,11 @@ angular.module('timeslides', ['ngRoute'])
 
 		$http.post( API_ENDPOINT, body).success( function(data){
 			// Once the post has returned, lets direct the user to their page
-			$location.path('/'+data);
+			$location.path('/movie/'+data);
 			$scope.$apply();
 		}).error(function(){
 			// example
-			$location.path('/fb8d97c6-5f5a-4c85-9d84-7594ecff4b79');
+			$location.path('/movie/error');
 			$scope.$apply();
 		});
 	};
@@ -75,8 +80,8 @@ angular.module('timeslides', ['ngRoute'])
 }])
 
 .controller('submitController', ['$scope','$routeParams', '$sce', function($scope,$routeParams,$sce){
-	$scope.id = $routeParams.id;
-	$scope.url = $sce.trustAsResourceUrl( API_ENDPOINT + $routeParams.id +'/index.html' );
+	var path = $routeParams.id!=='error' ? $routeParams.id +'/index.html' : '';
+	$scope.url = $sce.trustAsResourceUrl( API_ENDPOINT + path );
 }])
 
 .directive('popup', function(){
@@ -84,6 +89,6 @@ angular.module('timeslides', ['ngRoute'])
 		restrict: 'E',
 		replace:true,
 		transclude: true,
-		template : '<div class="popup"><a href="#" class="close"></a><div ng-transclude></div></div>'
+		template : '<div class="popup"><a href="#" class="close"></a><section ng-transclude></section></div>'
 	};
 });

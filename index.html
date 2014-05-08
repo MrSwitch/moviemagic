@@ -9,29 +9,30 @@
 	</head>
 
 	<body ng-controller="app">
+		<div class="container">
+			<section>
+				<h2>Search images</h2>
+				<form ng-submit="findImages()">
+					<input type="url" ng-model="url" placeholder="Find images"/>
+					<button type="submit">Search</button>
+				</form>
+			</section>
 
-		<section>
-			<h2>Search images</h2>
-			<form ng-submit="findImages()">
-				<input type="url" ng-model="url" placeholder="Find images"/>
-				<button type="submit">Search</button>
-			</form>
-		</section>
+			<section>
+				<h2>Images</h2>
+				<!-- Loop through images and provide drag and drop -->
+				<timeline frames="images" selected="addToTimeline"></timeline>
+			</section>
 
-		<section>
-			<h2>Images</h2>
-			<!-- Loop through images and provide drag and drop -->
-			<timeline frames="images" selected="addToTimeline"></timeline>
-		</section>
+			<section id="timeline">
+				<h2>Timeline</h2>
 
-		<section id="timeline">
-			<h2>Timeline</h2>
+				<timeline frames="timeline"></timeline>
 
-			<timeline frames="timeline"></timeline>
+				<button ng-click="submit()">Make movie</button>
 
-			<button ng-click="submit()">Make movie</button>
-
-		</section>
+			</section>
+		</div>
 
 
 		<div ng-view></div>

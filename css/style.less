@@ -1,15 +1,80 @@
 @import "mixins";
 
+@containerWidth: 960px;
+@baseFont: 'Guardian Sans Cond', Tahoma, 'Trebuchet MS', TrebuchetMS, sans-serif;
+@baseFontColor: #fff;
+@baseFontSize: 16px;
+@inputFontSize: @baseFontSize - 4px;
+@buttonColor: #fff;
+@buttonBackground: #e33a95;
+
+
 *{
 	box-sizing:border-box;
 }
 
-h3{
-	
+body {
+	background: #1c1f21;
+	color: @baseFontColor;
+	font-family: @baseFont;
+	font-size: @baseFontSize;
+	padding-top: 40px;
 }
 
 a{
 	text-decoration: none;
+	color:inherit;
+}
+
+textarea, input { outline: none; }
+
+input[type=url] {
+	color:#3c3c3c;
+	font-family: @baseFont;
+	font-size: @inputFontSize;
+	border-radius: 0;
+	background-color: #FFF;
+	padding: 13px;
+	margin-bottom: 10px;
+	width:100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0);
+}
+
+button {
+	background: @buttonBackground;
+	color: @buttonColor;
+  border: 0 none;
+  border-radius: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-family: @baseFont;
+  font-size: @baseFontSize;
+  font-weight: 300;
+  line-height: 20px;
+  padding: 7px 10px;
+  text-transform: none;
+  transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+}
+
+.container {
+	width: @containerWidth;
+	margin: 0 auto;
+}
+
+section {
+	h2 {
+		background: #268dce;
+		text-transform: uppercase;
+		font-size: @baseFontSize * 1.2;
+		padding: 16px;
+
+	}
 }
 
 .timeline{
@@ -97,7 +162,6 @@ a{
 }
 
 
-
 .popup{
 	position:fixed;
 	top:5%;
@@ -118,5 +182,14 @@ a{
 		&:before{
 			content:'\2715';
 		}
+	}
+}
+
+@media all and (max-width: @containerWidth) {
+	body {
+		padding: 0 20px 20px 20px;
+	}
+  .container {
+		width: 100%;
 	}
 }

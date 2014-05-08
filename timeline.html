@@ -1,7 +1,7 @@
 <div class="timeline">
 	<div class="dropzone">
-		<figure ng-repeat-start="item in frames track by $index" class="placeholder" timeline-on-drop="onDrop"></figure>
-		<figure ng-repeat-end draggable="true" ng-click="$parent.selected(item)" timeline-on-drop="onDrop">
+		<figure ng-repeat-start="item in frames track by $index" class="placeholder" timeline-on-drop="onDrop" timeline-drop-index="$index"></figure>
+		<figure ng-repeat-end draggable="true" ng-click="$parent.selected(item)" timeline-on-drop="onDrop" timeline-drop-index="$index" timeline-drop-replace="true">
 			<img ng-src="{{item.image}}" />
 			<figcaption><input type="text" ng-model="item.title" placeholder="text"/></figcaption>
 		</figure>

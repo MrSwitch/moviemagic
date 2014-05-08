@@ -13,8 +13,15 @@ angular.module('timeslides', [])
 		templateUrl: 'timeline.html',
 		link : function(scope, elms, attrs){
 
-			scope.onDrop = function(item){
-				scope.frames.push(item);
+			scope.onDrop = function(item, index, replace){
+				// insert into position defined by index
+				if(index===undefined){
+					// add to the end
+					scope.frames.push(item);
+				}
+				else{
+					scope.frames.splice(index, ~~replace, item);
+				}
 				scope.$apply();
 			};
 
@@ -61,7 +68,9 @@ angular.module('timeslides', [])
 	return {
 		restrict : 'A',
 		scope : {
-			timelineOnDrop : '='
+			timelineOnDrop : '=',
+			timelineDropIndex : '=',
+			timelineDropReplace : '='
 		},
 		link : function(scope, el, attrs){
 			//elms.bind('drop', scope.onDrop );
@@ -74,11 +83,12 @@ angular.module('timeslides', [])
 			el.bind('drop', function(e){
 				e.preventDefault();
 				e.stopPropagation();
+
 				el.removeClass('dragenter');
+
 				var data = e.dataTransfer.getData("text");
 				var dragEl = document.getElementById(data);
-				var dropEl = document.getElementById(id);
-				scope.timelineOnDrop( angular.element(dragEl).scope().item );
+				scope.timelineOnDrop( angular.element(dragEl).scope().item, scope.timelineDropIndex, scope.timelineDropReplace );
 			});
 
 			// by default elements can not be dropped into others

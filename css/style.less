@@ -80,7 +80,7 @@ section {
 }
 
 .timeline{
-
+	overflow: hidden;
 	width:100%;
 	background: #fff;
 	color: #333;
@@ -107,8 +107,13 @@ section {
 		display:inline-block;
 		position:relative;
 		width:100px;
-		min-width:100px;
-		min-height:100px;
+		min-width:130px;
+		min-height:130px;
+
+		.asset {
+			width: 130px;
+			height: 130px;
+		}
 
 		> img{
 			width:100%;
@@ -137,9 +142,6 @@ section {
 			&:before{
 				content:"";
 				height:100px;
-			}
-			&:after{
-				content:"Dropzone";
 			}
 		}
 

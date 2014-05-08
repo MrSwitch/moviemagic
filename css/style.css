@@ -72,6 +72,7 @@ section h2 {
   padding: 16px;
 }
 .timeline {
+  overflow: hidden;
   width: 100%;
   background: #fff;
   color: #333;
@@ -99,9 +100,13 @@ section h2 {
   display: inline-block;
   position: relative;
   width: 100px;
-  min-width: 100px;
-  min-height: 100px;
+  min-width: 130px;
+  min-height: 130px;
   border: 3px dotted transparent;
+}
+.timeline figure .asset {
+  width: 130px;
+  height: 130px;
 }
 .timeline figure > img {
   width: 100%;
@@ -129,9 +134,6 @@ section h2 {
 .timeline figure.flex:before {
   content: "";
   height: 100px;
-}
-.timeline figure.flex:after {
-  content: "Dropzone";
 }
 .timeline figure.dragenter {
   border-color: orangered;

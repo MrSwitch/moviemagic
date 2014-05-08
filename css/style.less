@@ -87,14 +87,14 @@ section {
 	position: relative;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
+	overflow:hidden;
 
 	>.dropzone{
 		display:flex;
 		align-items:flex-start;
 		flex-direction:row;
 		min-height:50px;
-		overflow: hidden;
-		.transition( margin-left 0.3s );
+		overflow: auto;
 
 		&:empty:before{
 			content:"Drag images here";

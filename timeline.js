@@ -34,27 +34,22 @@ angular.module('timeslides')
 
 			scope.next = function(){
 				// scroll left
-				currentIndex += 1;
-				scroll();
+				scroll(1);
 			};
 
 			scope.prev = function(){
 				// scroll right
-				if(currentIndex>0){
-					currentIndex -= 1;
-				}
-				scroll();
+				scroll(-1);
 			};
 
-			var scroll = function(){
-				dropzone.style.marginLeft = - ( containerWidth * currentIndex) + "px";
+			var scroll = function(direction){
+				dropzone.scrollLeft += ( containerWidth * direction);
 			};
 
 			// resize
 			var resize = function(){
 				// Set container width
 				containerWidth = dropzone.offsetWidth;
-				scroll();
 			};
 
 			window.addEventListener('resize', resize);

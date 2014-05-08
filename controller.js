@@ -80,8 +80,10 @@ angular.module('timeslides', ['ngRoute'])
 }])
 
 .controller('submitController', ['$scope','$routeParams', '$sce', function($scope,$routeParams,$sce){
+
 	var path = $routeParams.id!=='error' ? $routeParams.id +'/index.html' : '';
 	$scope.url = $sce.trustAsResourceUrl( API_ENDPOINT + path );
+
 }])
 
 .directive('popup', function(){
@@ -90,5 +92,34 @@ angular.module('timeslides', ['ngRoute'])
 		replace:true,
 		transclude: true,
 		template : '<div class="popup"><a href="#" class="close"></a><section ng-transclude></section></div>'
+	};
+})
+
+
+.directive('share', function(){
+
+	return {
+		restrict: 'E',
+		replace:true,
+		scope:{
+			url:'@url',
+			message:'@message'
+		},
+		template : '<div><button class="fa fa-twitter"></button><button class="fa fa-facebook"></button></div>',
+		link : function(scope, el, attrs){
+			el.bind('click', function(e){
+				var service = e.target.className.match(/\bfa-(.+?)\b/)[1];
+				var url = {
+					'twitter' : 'http://twitter.com/share?url=' + encodeURIComponent(scope.url) + '&text=' + scope.message,
+					'facebook' : 'http://www.facebook.com/sharer.php?u=' + encodeURIComponent(scope.url) + '&t=' + scope.message
+				}[service];
+				var w = 500, h = 500;
+				var W = document.documentElement.offsetWidth,
+					H = document.documentElement.offsetHeight;
+				var l = (W - w)/2,
+					t = (H - h)/2;
+				window.open( url, '_blank', 'resizable=true,location=true,width='+w+',height='+h+',left='+l+',top='+t);
+			});
+		}
 	};
 });

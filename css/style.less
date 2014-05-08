@@ -8,6 +8,9 @@ h3{
 	
 }
 
+a{
+	text-decoration: none;
+}
 
 .timeline{
 
@@ -89,6 +92,31 @@ h3{
 					content:"Remove item from list";
 				}
 			}
+		}
+	}
+}
+
+
+
+.popup{
+	position:fixed;
+	top:5%;
+	left:5%;
+	right:5%;
+	bottom:5%;
+	background-color: white;
+	color:black;
+	box-shadow:0 0 100px black;
+
+	> .close{
+		position:absolute;
+		top:-1em;
+		right:-1em;
+		background-color:black;
+		color:white;
+
+		&:before{
+			content:'\2715';
 		}
 	}
 }

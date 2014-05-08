@@ -93,7 +93,7 @@ angular.module('timeslides', [])
 
 			// by default elements can not be dropped into others
 			el.bind('dragover', function(e){
-				el.addClass('dragover');
+				el.addClass('dragenter');
 				e.preventDefault();
 			});
 			el.bind('dragenter', function(e){
@@ -118,6 +118,40 @@ angular.module('timeslides', [])
 			el.bind("dragstart", function(e) {
 				e.dataTransfer.setData('text', id);
             });
+		}
+	};
+}).directive('timelineDiscard', function(){
+	return {
+		restrict : 'A',
+		link : function(scope, el, attrs){
+
+			el.bind('drop', function(e){
+				e.preventDefault();
+				e.stopPropagation();
+
+				el.removeClass('dragenter');
+
+				var data = e.dataTransfer.getData("text");
+				var dragEl = document.getElementById(data);
+				var index = scope.frames && scope.frames.indexOf( angular.element(dragEl).scope().item );
+				if(index>-1){
+					scope.frames.splice(index,1);
+					scope.$apply();
+				}
+			});
+
+			// by default elements can not be dropped into others
+			el.bind('dragover', function(e){
+				e.preventDefault();
+			});
+			el.bind('dragenter', function(e){
+				el.addClass('dragenter');
+				e.preventDefault();
+			});
+			el.bind('dragleave', function(e){
+				el.removeClass('dragenter');
+				e.preventDefault();
+			});
 		}
 	};
 });

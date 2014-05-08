@@ -21,6 +21,8 @@ body {
 	padding-top: 40px;
 }
 
+textarea, input, button { outline: none; }
+
 a{
 	text-decoration: none;
 	color:inherit;
@@ -56,10 +58,8 @@ button {
   font-weight: 300;
   line-height: 20px;
   padding: 7px 10px;
+  margin: 0;
   text-transform: none;
-  transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -webkit-transition: all 0.3s ease 0s;
 }
 
 .container {
@@ -68,6 +68,8 @@ button {
 }
 
 section {
+	margin-bottom: 20px;
+
 	h2 {
 		background: #268dce;
 		text-transform: uppercase;
@@ -80,15 +82,18 @@ section {
 .timeline{
 
 	width:100%;
+	background: #fff;
+	color: #333;
+	position: relative;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
 
 	>.dropzone{
-
 		display:flex;
 		align-items:flex-start;
-		background-color:#eee;
 		flex-direction:row;
 		min-height:50px;
-		overflow: auto;
+		overflow: hidden;
 		.transition( margin-left 0.3s );
 
 		&:empty:before{
@@ -148,10 +153,33 @@ section {
 	}
 
 	.controls{
+		opacity: 0.8;
+
+		.prev, .next {
+			position: absolute;
+			left: 0;
+			top: 30%;
+			background: #000;
+			color: #fff;
+			padding: 10px;
+		}
+
+		.next {
+			left: auto;
+			right: 0;
+		}
+
 		.discard{
-			&:before{
+			font-size:@baseFontSize * 1.2;
+
+			color: #000;
+			position: absolute;
+			bottom: 5px;
+			right: 5px;
+
+			/*&:before{
 				content:'\2715';
-			}
+			}*/
 			&.dragenter{
 				background-color:red;
 				color:white;

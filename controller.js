@@ -19,6 +19,7 @@ angular.module('timeslides', ['ngRoute'])
 	// Define a function for finding the images available from the API
 	$scope.findImages = function(){
 
+		/*
 		$http.get("http://proxy-server.herokuapp.com/" + $scope.url).success( function(text){
 
 			// Find all the images in the page
@@ -34,11 +35,17 @@ angular.module('timeslides', ['ngRoute'])
 			}
 		});
 
-		/* CORS ERROR
-		$http.get( API_ENDPOINT + 'findimages?url=' + $scope.url).success( function(text){
-			$scope.images = JSON.parse(text);
+		/*/
+		// CORS ERROR
+		$http.get( API_ENDPOINT + 'findimages?url=' + $scope.url).success( function(response){
+			angular.forEach(response.results, function(item){
+				$scope.images.push({
+					image : item,
+					text : ""
+				});
+			});
 		});
-		*/
+		/**/
 	};
 
 	// Load up initial search

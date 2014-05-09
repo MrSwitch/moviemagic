@@ -82,7 +82,7 @@ angular.module('timeslides', ['ngRoute'])
 
 		$http.post( API_ENDPOINT, body).success( function(data){
 			// Once the post has returned, lets direct the user to their page
-			$location.path('/movie/'+data);
+			$location.path( '/movie/' + encodeURIComponent(data.share_url) );
 			$scope.$apply();
 		}).error(function(){
 			// example
@@ -95,8 +95,8 @@ angular.module('timeslides', ['ngRoute'])
 
 .controller('submitController', ['$scope','$routeParams', '$sce', function($scope,$routeParams,$sce){
 
-	var path = $routeParams.id!=='error' ? $routeParams.id +'/index.html' : '';
-	$scope.url = $sce.trustAsResourceUrl( API_ENDPOINT + path );
+	var path = $routeParams.id!=='error' ? decodeURIComponent( $routeParams.id ) : API_ENDPOINT;
+	$scope.url = $sce.trustAsResourceUrl( path );
 
 }])
 

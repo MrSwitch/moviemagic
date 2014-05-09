@@ -16,9 +16,17 @@ angular.module('timeslides', ['ngRoute'])
 	// Preload the search from the search query
 	$scope.url = $location.search().url;
 
+	$scope.$watch('url', function(url){
+		// Update URL
+		$location.search({url:url});
+	});
+
 	// Define a function for finding the images available from the API
 	$scope.findImages = function(){
 
+		$scope.images = [];
+
+		// Run query
 		$http.get("http://proxy-server.herokuapp.com/" + $scope.url).success( function(text){
 
 			// Find all the images in the page

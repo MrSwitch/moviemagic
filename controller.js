@@ -19,7 +19,6 @@ angular.module('timeslides', ['ngRoute'])
 	// Define a function for finding the images available from the API
 	$scope.findImages = function(){
 
-		/*
 		$http.get("http://proxy-server.herokuapp.com/" + $scope.url).success( function(text){
 
 			// Find all the images in the page

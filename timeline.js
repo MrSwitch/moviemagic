@@ -63,6 +63,7 @@ angular.module('timeslides')
 	return {
 		restrict : 'A',
 		scope : {
+			frames : '=',
 			timelineOnDrop : '=',
 			timelineDropIndex : '=',
 			timelineDropReplace : '='
@@ -83,7 +84,22 @@ angular.module('timeslides')
 
 				var data = e.dataTransfer.getData("text");
 				var dragEl = document.getElementById(data);
-				scope.timelineOnDrop( angular.element(dragEl).scope().item, scope.timelineDropIndex, scope.timelineDropReplace );
+
+				var item = angular.element(dragEl).scope().item;
+
+				var index = scope.frames.indexOf(item);
+				if( index === -1 ){
+					// Is this coming from outside?
+					scope.timelineOnDrop( angular.copy(item), scope.timelineDropIndex, scope.timelineDropReplace );
+				}
+				else{
+
+					// remove from its original position
+					scope.frames.splice(index, 1);
+					
+					scope.frames.splice(scope.timelineDropIndex, 0, item);
+					scope.$apply();
+				}
 			});
 
 			// by default elements can not be dropped into others

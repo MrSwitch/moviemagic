@@ -28,7 +28,7 @@ angular.module('timeslides', ['ngRoute'])
 
 			while( (m = reg.exec(text)) ){
 				$scope.images.push({
-					image : m[3],
+					url : m[3],
 					text : ""
 				});
 			}
@@ -39,7 +39,7 @@ angular.module('timeslides', ['ngRoute'])
 		$http.get( API_ENDPOINT + 'findimages?url=' + $scope.url).success( function(response){
 			angular.forEach(response.results, function(item){
 				$scope.images.push({
-					image : item,
+					url : item,
 					text : ""
 				});
 			});

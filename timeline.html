@@ -2,8 +2,8 @@
 	<div class="dropzone">
 		<figure ng-repeat-start="item in frames track by $index" class="placeholder" timeline-on-drop="onDrop" timeline-drop-index="$index"></figure>
 		<figure ng-repeat-end draggable="true" ng-click="$parent.selected(item)" timeline-on-drop="onDrop" timeline-drop-index="$index" timeline-drop-replace="true">
-			<div class="asset" style="background: url({{ item.image }})  no-repeat center center #000; background-size: cover;"></div>
-			<!--<img ng-src="{{item.image}}" />-->
+			<div class="asset" style="background: url({{ item.url }})  no-repeat center center #000; background-size: cover;"></div>
+			<!--<img ng-src="{{item.url}}" />-->
 			<figcaption><input type="text" ng-model="item.text" placeholder="text"/></figcaption>
 		</figure>
 		<figure class="placeholder flex" timeline-on-drop="onDrop"></figure>
